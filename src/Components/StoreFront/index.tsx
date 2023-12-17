@@ -1,10 +1,5 @@
-import SearchAppBar from "./AppBar";
+import SearchAppBar from './AppBar/index.tsx';
 
-
-function StoreFront() {
-    return ( <>
-    <SearchAppBar></SearchAppBar>
-    </> );
-}
+const StoreFront = () => <SearchAppBar />;
 
 export default StoreFront;
