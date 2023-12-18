@@ -4,9 +4,9 @@ import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import MenuIcon from '@mui/icons-material/Menu';
-import { Button } from '@mui/material';
 
 import SearchBar from './SearchBar/index.tsx';
+import LoginButton from './LoginButton/index.tsx';
 
 const TypographyStyle = { flexGrow: 1, display: { xs: 'none', sm: 'block' } };
 
@@ -22,9 +22,7 @@ const SearchAppBar = () => {
 						MUI
 					</Typography>
 					<SearchBar />
-					<Button sx={{ ml: 2 }} color='inherit'>
-						Login
-					</Button>
+					<LoginButton />
 				</Toolbar>
 			</AppBar>
 		</Box>
