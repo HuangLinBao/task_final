@@ -4,8 +4,11 @@ import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import MenuIcon from '@mui/icons-material/Menu';
+import { Button } from '@mui/material';
 
 import SearchBar from './SearchBar/index.tsx';
+
+const TypographyStyle = { flexGrow: 1, display: { xs: 'none', sm: 'block' } };
 
 const SearchAppBar = () => {
 	return (
@@ -15,14 +18,13 @@ const SearchAppBar = () => {
 					<IconButton size='large' edge='start' color='inherit' aria-label='open drawer' sx={{ mr: 2 }}>
 						<MenuIcon />
 					</IconButton>
-					<Typography
-						variant='h6'
-						noWrap
-						component='div'
-						sx={{ flexGrow: 1, display: { xs: 'none', sm: 'block' } }}>
+					<Typography variant='h6' noWrap component='div' sx={TypographyStyle}>
 						MUI
 					</Typography>
 					<SearchBar />
+					<Button sx={{ ml: 2 }} color='inherit'>
+						Login
+					</Button>
 				</Toolbar>
 			</AppBar>
 		</Box>

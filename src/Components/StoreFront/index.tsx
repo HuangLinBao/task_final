@@ -1,5 +1,7 @@
 import SearchAppBar from './AppBar/index.tsx';
 
-const StoreFront = () => <SearchAppBar />;
+const StoreFront = () => {
+	return <SearchAppBar />;
+};
 
 export default StoreFront;
