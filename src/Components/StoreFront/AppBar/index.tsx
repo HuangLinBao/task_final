@@ -21,8 +21,8 @@ const SearchAppBar = () => {
 					<Typography variant='h6' noWrap component='div' sx={TypographyStyle}>
 						MUI
 					</Typography>
-					<SearchBar />
-					<LoginButton />
+					<SearchBar data-test-id='searchBar' />
+					<LoginButton data-test-id='buttonLogin' />
 				</Toolbar>
 			</AppBar>
 		</Box>
