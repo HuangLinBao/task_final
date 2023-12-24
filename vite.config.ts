@@ -15,7 +15,4 @@ export default defineConfig({
 		// since parsing CSS is slow
 		css: true,
 	},
-	optimizeDeps: {
-		include: ['@testing-library/react', '@testing-library/jest-dom'],
-	},
 });

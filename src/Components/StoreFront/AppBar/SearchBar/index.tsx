@@ -1,6 +1,7 @@
 import InputBase from '@mui/material/InputBase';
 import { styled, alpha } from '@mui/material/styles';
 import SearchIcon from '@mui/icons-material/Search';
+import React, { PropsWithChildren } from 'react';
 
 const Search = styled('div')(({ theme }) => ({
 	position: 'relative',
@@ -43,15 +44,20 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 		},
 	},
 }));
+type Props = PropsWithChildren & {
+	'data-testid'?: string;
+};
 
-const SearchBar = () => {
+const SearchBar: React.FC<Props> = ({ ...props }) => {
 	return (
-		<Search data-test-id='search'>
-			<SearchIconWrapper>
-				<SearchIcon />
-			</SearchIconWrapper>
-			<StyledInputBase placeholder='Search…' inputProps={{ 'aria-label': 'search' }} />
-		</Search>
+		<div {...props}>
+			<Search data-testid='search'>
+				<SearchIconWrapper>
+					<SearchIcon />
+				</SearchIconWrapper>
+				<StyledInputBase placeholder='Search…' inputProps={{ 'aria-label': 'search' }} />
+			</Search>
+		</div>
 	);
 };
 

@@ -1,8 +1,13 @@
 import { Button } from '@mui/material';
+import React, { PropsWithChildren } from 'react';
 
-const LoginButton = () => {
+type Props = PropsWithChildren & {
+	'data-testid'?: string;
+};
+
+const LoginButton: React.FC<Props> = ({ ...props }) => {
 	return (
-		<Button sx={{ ml: 2 }} color='inherit'>
+		<Button {...props} sx={{ ml: 2 }} color='inherit'>
 			Login
 		</Button>
 	);
