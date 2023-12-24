@@ -4,14 +4,17 @@ import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import MenuIcon from '@mui/icons-material/Menu';
-import React, { PropsWithChildren } from 'react';
+import React, { Dispatch, PropsWithChildren, SetStateAction } from 'react';
 
 import SearchBar from './SearchBar/index.tsx';
 import LoginButton from './LoginButton/index.tsx';
+import ThemeToggle from './ThemeToggle/index.tsx';
 
 const TypographyStyle = { flexGrow: 1, display: { xs: 'none', sm: 'block' } };
 type Props = PropsWithChildren & {
 	'data-testid'?: string;
+	theme: boolean;
+	setTheme: Dispatch<SetStateAction<boolean>>;
 };
 
 const SearchAppBar: React.FC<Props> = ({ ...props }) => {
@@ -27,6 +30,7 @@ const SearchAppBar: React.FC<Props> = ({ ...props }) => {
 					</Typography>
 					<SearchBar data-testid='searchBar' />
 					<LoginButton data-testid='buttonLogin' />
+					<ThemeToggle theme={props.theme} setTheme={props.setTheme} />
 				</Toolbar>
 			</AppBar>
 		</Box>
