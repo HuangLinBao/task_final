@@ -65,6 +65,7 @@ const ThemeToggle: React.FC<Props> = ({ ...props }) => {
 				control={<MaterialUISwitch defaultChecked />}
 				label={undefined}
 				onChange={toggleTheme}
+				sx={{ ml: 2 }}
 			/>
 		</FormGroup>
 	);
