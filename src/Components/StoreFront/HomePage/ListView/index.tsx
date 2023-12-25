@@ -5,14 +5,14 @@ type Props = PropsWithChildren & {
 	'data-testid'?: string;
 };
 
-const ListView: React.FC<Props> = ({ ...props }) => {
+const ListView: React.FC<Props> = (props) => {
 	const { children } = props;
 	return (
-		<React.Fragment {...props}>
-			<Paper elevation={0} sx={{ p: 1 }}>
+		<div {...props}>
+			<Paper data-testid='list' elevation={0} sx={{ p: 1 }}>
 				{children}
 			</Paper>
-		</React.Fragment>
+		</div>
 	);
 };
 

@@ -9,10 +9,10 @@ type Prpos = PropsWithChildren & {
 	'data-testid'?: string;
 };
 
-const ProductCard: React.FC<Prpos> = ({ ...props }) => {
+const ProductCard: React.FC<Prpos> = (props) => {
 	return (
-		<React.Fragment {...props}>
-			<Card elevation={3} sx={{ maxWidth: 345 }}>
+		<div {...props}>
+			<Card data-testid='card' elevation={3} sx={{ maxWidth: 345 }}>
 				<CardActionArea>
 					<CardMedia
 						component='img'
@@ -23,13 +23,13 @@ const ProductCard: React.FC<Prpos> = ({ ...props }) => {
 						<Typography gutterBottom variant='h5' component='div'>
 							Lizard
 						</Typography>
-						<Typography variant='body2' color='text.secondary'>
+						<Typography data-testid='price' variant='body2' color='text.secondary'>
 							$999
 						</Typography>
 					</CardContent>
 				</CardActionArea>
 			</Card>
-		</React.Fragment>
+		</div>
 	);
 };
 

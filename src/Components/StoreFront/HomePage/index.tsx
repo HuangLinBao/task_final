@@ -8,11 +8,11 @@ type Props = React.PropsWithChildren & {
 	'data-testid'?: string;
 };
 
-const HomePage: React.FC<Props> = ({ ...props }) => {
+const HomePage: React.FC<Props> = (props) => {
 	return (
 		<Box {...props}>
-			<ListView>
-				<ProductCard />
+			<ListView data-testid='listView'>
+				<ProductCard data-testid='productCard' />
 			</ListView>
 		</Box>
 	);

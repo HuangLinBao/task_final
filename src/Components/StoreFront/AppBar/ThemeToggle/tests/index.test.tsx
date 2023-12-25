@@ -4,8 +4,8 @@ import ThemeToggle from '../index.tsx';
 
 describe('Simple AppBar test', () => {
 	it('the app bar is visible', () => {
-		render(<ThemeToggle theme={false} setTheme={() => {}} />);
-		const toggle = screen.getByTestId('themeSwitch');
+		render(<ThemeToggle />);
+		const toggle = screen.getByTestId('toggle');
 		expect(toggle).toBeInTheDocument();
 	});
 });

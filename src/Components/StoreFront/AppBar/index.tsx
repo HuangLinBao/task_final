@@ -4,7 +4,7 @@ import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
 import Typography from '@mui/material/Typography';
 import MenuIcon from '@mui/icons-material/Menu';
-import React, { Dispatch, PropsWithChildren, SetStateAction } from 'react';
+import React, { PropsWithChildren } from 'react';
 import styled from 'styled-components';
 
 import SearchBar from './SearchBar/index.tsx';
@@ -17,8 +17,6 @@ const TypographyStyle = styled(Typography)(() => ({
 }));
 type Props = PropsWithChildren & {
 	'data-testid'?: string;
-	theme: boolean;
-	setTheme: Dispatch<SetStateAction<boolean>>;
 };
 
 const SearchAppBar: React.FC<Props> = ({ ...props }) => {
@@ -30,11 +28,11 @@ const SearchAppBar: React.FC<Props> = ({ ...props }) => {
 						<MenuIcon />
 					</IconButton>
 					<TypographyStyle variant='h6' noWrap component='div'>
-						MUI
+						Welcome To Our Humble Store
 					</TypographyStyle>
 					<SearchBar data-testid='searchBar' />
-					<LoginButton data-testid='buttonLogin' />
-					<ThemeToggle theme={props.theme} setTheme={props.setTheme} />
+					<LoginButton onClick={() => {}} data-testid='buttonLogin' />
+					<ThemeToggle data-testid='theme-toggle' />
 				</Toolbar>
 			</AppBar>
 		</Box>

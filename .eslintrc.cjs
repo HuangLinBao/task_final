@@ -20,9 +20,11 @@ module.exports = {
 		'react/jsx-filename-extension': [1, { extensions: ['.js', '.jsx', '.tsx'] }],
 		'react/react-in-jsx-scope': 'off',
 		'import/prefer-default-export': 'off',
+		'import/no-cycle': 'off',
 		'react/require-default-props': 'off',
 		'react/jsx-props-no-spreading': 'off',
 		'react/jsx-no-useless-fragment': 'off',
+		'react/jsx-no-constructed-context-values': 'off',
 		'react/function-component-definition': ['error', { namedComponents: 'arrow-function' }],
 		'import/order': [
 			'warn',

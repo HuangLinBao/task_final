@@ -3,13 +3,16 @@ import React, { PropsWithChildren } from 'react';
 
 type Props = PropsWithChildren & {
 	'data-testid'?: string;
+	onClick: () => void;
 };
 
-const LoginButton: React.FC<Props> = ({ ...props }) => {
+const LoginButton: React.FC<Props> = (props) => {
 	return (
-		<Button {...props} sx={{ ml: 2 }} color='inherit'>
-			Login
-		</Button>
+		<div {...props}>
+			<Button data-testid='btn' sx={{ ml: 2 }} color='inherit'>
+				Login
+			</Button>
+		</div>
 	);
 };
 
