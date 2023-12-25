@@ -22,6 +22,7 @@ module.exports = {
 		'import/prefer-default-export': 'off',
 		'react/require-default-props': 'off',
 		'react/jsx-props-no-spreading': 'off',
+		'react/jsx-no-useless-fragment': 'off',
 		'react/function-component-definition': ['error', { namedComponents: 'arrow-function' }],
 		'import/order': [
 			'warn',
