@@ -23,6 +23,7 @@ module.exports = {
 		'import/no-cycle': 'off',
 		'react/require-default-props': 'off',
 		'react/jsx-props-no-spreading': 'off',
+		'react/jsx-pascal-case': 'off',
 		'react/jsx-no-useless-fragment': 'off',
 		'react/jsx-no-constructed-context-values': 'off',
 		'react/function-component-definition': ['error', { namedComponents: 'arrow-function' }],

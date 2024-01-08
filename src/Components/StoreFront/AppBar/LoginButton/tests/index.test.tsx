@@ -12,7 +12,7 @@ describe('Login Button test', () => {
 	it('calls onClick when the button is clicked', () => {
 		const mockOnClick = vi.fn();
 		render(<LoginButton onClick={mockOnClick} />);
-		const loginButton = screen.getByText(/login/i);
+		const loginButton = screen.getByTestId('btn');
 		fireEvent.click(loginButton);
 		expect(mockOnClick).toHaveBeenCalledTimes(1);
 	});
