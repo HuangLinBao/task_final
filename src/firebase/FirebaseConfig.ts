@@ -2,9 +2,10 @@
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
+
 // Your web app's Firebase configuration
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
-export const firebaseConfig = {
+const firebaseConfig = {
 	apiKey: 'AIzaSyB39TvJCPngIKNn1bOiKRiIfdwktJCP4uA',
 	authDomain: 'storefront-6264e.firebaseapp.com',
 	projectId: 'storefront-6264e',
@@ -14,4 +15,4 @@ export const firebaseConfig = {
 	measurementId: 'G-F5WPZRPPY9',
 };
 
-
+export default firebaseConfig;

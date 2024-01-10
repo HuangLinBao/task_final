@@ -1,28 +1,41 @@
-import { Auth, createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
+import { useMutation, useQuery } from '@tanstack/react-query';
+import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword, signOut } from 'firebase/auth';
 
-export const createAccount = (auth: Auth, email: string, password: string) => {
-	createUserWithEmailAndPassword(auth, email, password)
-		.then((userCredential) => {
-			// Signed in
-			const { user } = userCredential;
-			// ...
-		})
-		.catch((error) => {
-			const errorCode = error.code;
-			const errorMessage = error.message;
-			// ..
+const auth = getAuth();
+const getCurrentUser = async () => {
+	return new Promise((resolve) => {
+		const unsubscribe = auth.onAuthStateChanged((user) => {
+			unsubscribe();
+			resolve(user);
 		});
+	});
+};
+const loginUser = async (email: string, password: string) => {
+	return signInWithEmailAndPassword(auth, email, password);
 };
 
-export const signInWithCredentials = (auth: Auth, email: string, password: string) => {
-	signInWithEmailAndPassword(auth, email, password)
-		.then((userCredential) => {
-			// Signed in
-			const { user } = userCredential;
-			// ...
-		})
-		.catch((error) => {
-			const errorCode = error.code;
-			const errorMessage = error.message;
-		});
+// Function to log out
+const logoutUser = async () => {
+	return auth.signOut();
+};
+
+// Function to register a new user
+const registerUser = async (email: string, password: string) => {
+	return createUserWithEmailAndPassword(auth, email, password);
+};
+
+export const useCurrentUser = () => {
+	return useQuery('currentUser', getCurrentUser);
+};
+
+export const useLogin = () => {
+	return useMutation(loginUser);
+};
+
+export const useLogout = () => {
+	return useMutation(logoutUser);
+};
+
+export const useRegister = () => {
+	return useMutation(registerUser);
 };
