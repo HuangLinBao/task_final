@@ -1,5 +1,5 @@
 import { useMutation, useQuery } from '@tanstack/react-query';
-import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword, signOut } from 'firebase/auth';
+import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword } from 'firebase/auth';
 
 const auth = getAuth();
 const getCurrentUser = async () => {
@@ -25,17 +25,50 @@ const registerUser = async (email: string, password: string) => {
 };
 
 export const useCurrentUser = () => {
-	return useQuery('currentUser', getCurrentUser);
+	return useQuery({ queryKey: ['currentUser'], queryFn: getCurrentUser });
 };
 
 export const useLogin = () => {
-	return useMutation(loginUser);
+	return useMutation({
+		mutationFn: async (formData: { email: string; password: string }) => {
+			const { email, password } = formData;
+			return loginUser(email, password);
+		},
+		onSuccess: () => {
+			// Handle success
+		},
+		onError: () => {
+			// Handle error
+		},
+		// Other options if needed
+	});
 };
 
 export const useLogout = () => {
-	return useMutation(logoutUser);
+	return useMutation({
+		mutationFn: () => logoutUser(),
+		onSuccess: () => {
+			// Handle success
+		},
+		onError: () => {
+			// Handle error
+		},
+		// Other options if needed
+	});
 };
 
 export const useRegister = () => {
-	return useMutation(registerUser);
+	return useMutation({
+		mutationFn: async (formData: { email: string; password: string }) => {
+			const { email, password } = formData;
+			return registerUser(email, password);
+		},
+		onSuccess: () => {
+			// Handle success
+		},
+		onError: () => {
+			// Handle error
+		},
+		// Other options if needed
+	});
 };

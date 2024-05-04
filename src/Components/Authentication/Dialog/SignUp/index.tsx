@@ -4,6 +4,7 @@ import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 
 import { defaultRegister, registerSchema } from '../../Validation/UserValidation.ts';
+import { useRegister } from '../../../../firebase/Authentication.ts';
 
 type Props = React.PropsWithChildren & {
 	'data-testid'?: string;
@@ -24,9 +25,12 @@ const SignUpForm: React.FC<Props> = (props) => {
 		resolver: yupResolver(registerSchema),
 		mode: 'onChange',
 	});
+	const { mutate: register, isLoading, isError } = useRegister(); // Use the useRegister hook
+
 	const onSubmit: SubmitHandler<FormData> = (data: FormData) => {
 		// Handle form submission
-		console.log(data);
+
+		register(data);
 	};
 	return (
 		<form onSubmit={handleSubmit(onSubmit)}>
@@ -51,6 +55,7 @@ const SignUpForm: React.FC<Props> = (props) => {
 								<TextField
 									data-testid='first-name'
 									required
+									fullWidth
 									id={field.name}
 									label='First Name'
 									variant='outlined'
@@ -90,22 +95,17 @@ const SignUpForm: React.FC<Props> = (props) => {
 					control={control}
 					render={({ field, fieldState }) => (
 						<>
-							<Box>
-								{fieldState.invalid && (
-									<Typography variant='caption' color='error'>
-										{fieldState.error?.message}
-									</Typography>
-								)}
-								<TextField
-									data-testid='email'
-									required
-									id={field.name}
-									label='Email'
-									variant='outlined'
-									value={field.value}
-									onChange={field.onChange}
-								/>
-							</Box>
+							<TextField
+								data-testid='email'
+								required
+								id={field.name}
+								label='Email'
+								variant='outlined'
+								value={field.value}
+								onChange={field.onChange}
+								helperText={fieldState.error?.message}
+								error={fieldState.invalid}
+							/>
 						</>
 					)}
 				/>
