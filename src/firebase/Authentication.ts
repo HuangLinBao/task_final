@@ -1,7 +1,8 @@
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword } from 'firebase/auth';
+import { auth } from './FirebaseConfig';
 
-const auth = getAuth();
+
 const getCurrentUser = async () => {
 	return new Promise((resolve) => {
 		const unsubscribe = auth.onAuthStateChanged((user) => {

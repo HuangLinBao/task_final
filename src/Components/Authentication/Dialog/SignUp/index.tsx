@@ -25,7 +25,7 @@ const SignUpForm: React.FC<Props> = (props) => {
 		resolver: yupResolver(registerSchema),
 		mode: 'onChange',
 	});
-	const { mutate: register, isLoading, isError } = useRegister(); // Use the useRegister hook
+	const { mutate: register } = useRegister(); // Use the useRegister hook
 
 	const onSubmit: SubmitHandler<FormData> = (data: FormData) => {
 		// Handle form submission
