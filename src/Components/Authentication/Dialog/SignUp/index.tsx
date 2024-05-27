@@ -25,22 +25,20 @@ const SignUpForm: React.FC<Props> = (props) => {
 		resolver: yupResolver(registerSchema),
 		mode: 'onChange',
 	});
-	const { mutate: register } = useRegister(); // Use the useRegister hook
-
+	const { mutate: register } = useRegister();
 	const onSubmit: SubmitHandler<FormData> = (data: FormData) => {
-		// Handle form submission
-
-		register(data);
+		register({ email: data.email, password: data.password });
 	};
+
+	//TODO: fix the refresh issue when submitting the form.
 	return (
-		<form onSubmit={handleSubmit(onSubmit)}>
+		<form onSubmit={handleSubmit(onSubmit)} noValidate>
 			<Box
 				{...props}
-				component='form'
+				component='div'
 				sx={{
 					'& > :not(style)': { m: 1, width: '25ch' },
-				}}
-				autoComplete='off'>
+				}}>
 				<Controller
 					name='firstName'
 					control={control}

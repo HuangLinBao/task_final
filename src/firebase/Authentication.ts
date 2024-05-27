@@ -1,5 +1,5 @@
 import { useMutation, useQuery } from '@tanstack/react-query';
-import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword } from 'firebase/auth';
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword } from 'firebase/auth';
 import { auth } from './FirebaseConfig';
 
 
@@ -28,6 +28,8 @@ const registerUser = async (email: string, password: string) => {
 export const useCurrentUser = () => {
 	return useQuery({ queryKey: ['currentUser'], queryFn: getCurrentUser });
 };
+
+
 
 export const useLogin = () => {
 	return useMutation({
@@ -62,7 +64,7 @@ export const useRegister = () => {
 	return useMutation({
 		mutationFn: async (formData: { email: string; password: string }) => {
 			const { email, password } = formData;
-			return registerUser(email, password);
+			registerUser(email, password);
 		},
 		onSuccess: () => {
 			// Handle success
