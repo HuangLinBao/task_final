@@ -8,6 +8,8 @@ import { useRegister } from '../../../../firebase/Authentication.ts';
 
 type Props = React.PropsWithChildren & {
 	'data-testid'?: string;
+	handleLoading: (loading: boolean) => void;
+	handleAlert: (severity: 'success' | 'error', message: string) => void;
 };
 
 type FormData = {
@@ -18,8 +20,7 @@ type FormData = {
 	repeatPassword: string;
 };
 
-// TODO: add the loading button for when we implement authentication
-const SignUpForm: React.FC<Props> = (props) => {
+const SignUpForm: React.FC<Props> = ({ handleLoading, handleAlert, ...props }) => {
 	const { control, handleSubmit } = useForm({
 		defaultValues: defaultRegister,
 		resolver: yupResolver(registerSchema),
@@ -27,10 +28,22 @@ const SignUpForm: React.FC<Props> = (props) => {
 	});
 	const { mutate: register } = useRegister();
 	const onSubmit: SubmitHandler<FormData> = (data: FormData) => {
-		register({ email: data.email, password: data.password });
+		handleLoading(true);
+		register(
+			{ email: data.email, password: data.password },
+			{
+				onSuccess: () => {
+					handleLoading(false);
+					handleAlert('success', 'Registration successful!');
+				},
+				onError: (error: any) => {
+					handleLoading(false);
+					handleAlert('error', error.message);
+				},
+			}
+		);
 	};
 
-	//TODO: fix the refresh issue when submitting the form.
 	return (
 		<form onSubmit={handleSubmit(onSubmit)} noValidate>
 			<Box

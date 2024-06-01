@@ -6,7 +6,7 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogActions from '@mui/material/DialogActions';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
-import { Alert, Tab, Tabs } from '@mui/material';
+import { Alert, CircularProgress, Tab, Tabs } from '@mui/material';
 
 import TabPanel, { a11yProps } from './Tabs/index.tsx';
 import LoginForm from './Login/index.tsx';
@@ -30,6 +30,20 @@ const BootstrapDialog = styled(Dialog)(({ theme }) => ({
 const AuthDialog: React.FC<Props> = (props) => {
 	const { open, handleclickclose } = props;
 	const [value, setValue] = React.useState(0);
+	const [isLoading, setIsLoading] = React.useState(false);
+	const [alertMessage, setAlertMessage] = React.useState<{ severity: 'success' | 'error'; message: string } | null>(
+		null
+	);
+	const handleLoading = (loading: boolean) => {
+		setIsLoading(loading);
+	};
+
+	const handleAlert = (severity: 'success' | 'error', message: string) => {
+		setAlertMessage({ severity, message });
+		setTimeout(() => {
+			setAlertMessage(null);
+		}, 3500);
+	};
 
 	const handleChange = (_event: React.SyntheticEvent, newValue: number) => {
 		setValue(newValue);
@@ -61,12 +75,12 @@ const AuthDialog: React.FC<Props> = (props) => {
 						<LoginForm data-testid='login-form' />
 					</TabPanel>
 					<TabPanel value={value} index={1}>
-						<SignUpForm data-testid='signup-form' />
+						<SignUpForm handleLoading={handleLoading} handleAlert={handleAlert} data-testid='signup-form' />
 					</TabPanel>
 				</DialogContent>
 				<DialogActions>
-					{/* TODO: Implement this alert thing */}
-					<Alert severity='success'>This is a success alert — check it out!</Alert>
+					{isLoading && <CircularProgress size={24} />}
+					{alertMessage && <Alert severity={alertMessage.severity}>{alertMessage.message}</Alert>}
 				</DialogActions>
 			</BootstrapDialog>
 		</div>
