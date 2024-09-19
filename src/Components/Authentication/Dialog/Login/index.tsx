@@ -4,34 +4,50 @@ import { Controller, SubmitHandler, useForm } from 'react-hook-form';
 import { yupResolver } from '@hookform/resolvers/yup';
 
 import { defaultLogin, loginSchema } from '../../Validation/UserValidation.ts';
+import { useLogin } from '../../../../firebase/Authentication.ts';
 
 type Props = React.PropsWithChildren & {
 	'data-testid'?: string;
+	handleClose: () => void;
+	handleLoading: (loading: boolean) => void;
+	handleAlert: (severity: 'success' | 'error', message: string) => void;
 };
 type FormData = {
 	email: string;
 	password: string;
 };
 // TODO: add the loading button for when we implement authentication
-const LoginForm: React.FC<Props> = (props) => {
+const LoginForm: React.FC<Props> = ({ handleClose, handleLoading, handleAlert, ...props }) => {
 	const { control, handleSubmit } = useForm({
 		defaultValues: defaultLogin,
 		resolver: yupResolver(loginSchema),
 		mode: 'onChange',
 	});
+	const { mutate: login } = useLogin();
 	const onSubmit: SubmitHandler<FormData> = (data: FormData) => {
-		// Handle form submission
-		console.log(data);
+		handleLoading(true);
+		login(
+			{ email: data.email, password: data.password },
+			{
+				onSuccess: () => {
+					handleLoading(false);
+					handleClose();
+				},
+				onError: (error: any) => {
+					handleLoading(false);
+					handleAlert('error', error.message);
+				},
+			}
+		);
 	};
 	return (
-		<form onSubmit={handleSubmit(onSubmit)}>
+		<form onSubmit={handleSubmit(onSubmit)} noValidate>
 			<Box
 				{...props}
-				component='form'
+				component='div'
 				sx={{
 					'& > :not(style)': { m: 1, width: '25ch' },
-				}}
-				autoComplete='off'>
+				}}>
 				<Controller
 					name='email'
 					control={control}

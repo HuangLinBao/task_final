@@ -72,10 +72,15 @@ const AuthDialog: React.FC<Props> = (props) => {
 						<Tab data-testid='signup' label='Sign Up' {...a11yProps(1)} />
 					</Tabs>
 					<TabPanel value={value} index={0}>
-						<LoginForm data-testid='login-form' />
+						<LoginForm
+							data-testid='login-form'
+							handleLoading={handleLoading}
+							handleClose={handleclickclose}
+							handleAlert={handleAlert}
+						/>
 					</TabPanel>
 					<TabPanel value={value} index={1}>
-						<SignUpForm handleLoading={handleLoading} handleAlert={handleAlert} data-testid='signup-form' />
+						<SignUpForm data-testid='signup-form' handleLoading={handleLoading} handleAlert={handleAlert} />
 					</TabPanel>
 				</DialogContent>
 				<DialogActions>
