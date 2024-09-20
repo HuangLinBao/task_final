@@ -9,7 +9,10 @@ const ListView: React.FC<Props> = (props) => {
 	const { children } = props;
 	return (
 		<div {...props}>
-			<Paper data-testid='list' elevation={0} sx={{ p: 1 }}>
+			<Paper
+				data-testid='list'
+				elevation={0}
+				sx={{ p: 1, display: 'flex', flexWrap: 'wrap', justifyContent: 'flex-start' }}>
 				{children}
 			</Paper>
 		</div>
